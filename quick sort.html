@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			var arr = [4,2,3,6,1,5,8,7]
+			//1、从中间选取基点  把基点从元素中取出来
+			//2、声明二个空数组left right   然后取出 【基点后的原数组arr】的第一位 和基点比较  小于的push 在left   大于等于的push 在right    //这个过程用while去循环 【 取出基点后的原数组arr】 的第一项去和基点比较  并删除这一项 更新原数组  while的跳出条件是这个数组的每一项都和基点比较完后被删除  这个长度最终会变为0  变为0时所有的都和基点比较完毕 跳出while循环
+			//3、然后left,right再重复上面的1,2步  可以用函数递归（传递left,right）   直到新的数组left,right长度小于等于1时    用来跳出函数递归 停止比较    
+			 
+			function quickSort(arr) {
+				if (arr.length <= 1) {
+					return arr;
+				} 
+				var basepoint = arr.splice(Math.floor((arr.length-1)/2),1)[0];//splice 定点删除数组中的元素  返回值是删除的元素 组成的数组
+				console.log(basepoint);
+				var left = [], right =[];
+				while (arr.length){
+					if (arr[0]<basepoint) {
+						left.push(arr.shift());   //shift() 删除数组中的第一位 返回值是该删除元素
+					}else{
+						right.push(arr.shift());
+					}
+				}
+				
+				return quickSort(left).concat([basepoint],quickSort(right));
+				 
+			}
+		</script>
+	</body>
+</html>
